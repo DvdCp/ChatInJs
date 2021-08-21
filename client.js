@@ -18,6 +18,10 @@ socket.on('new-user-connected', data => {
     appendMessage(data+" joined") 
 })
 
+socket.on('user-disconnected', data => {
+    appendMessage(data+" disconnected") 
+})
+
 messageForm.addEventListener('submit', e => {
     e.preventDefault();
     const messageToSend = messageInput.value
