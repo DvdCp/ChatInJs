@@ -6,15 +6,26 @@ const messageForm = document.getElementById('send-container');
 const messageInput = document.getElementById('message-input');
 const messageContainer = document.getElementById('message-container')
 
+// Asking for username
+const username = prompt("Hello ! Insert your username")
+socket.emit('new-user', username)
+
 socket.on('chat-message', data => {
-    appendMessage(data)
+    appendMessage(data.name+": "+data.message)
+})
+
+socket.on('new-user-connected', data => {
+    appendMessage(data+" joined") 
 })
 
 messageForm.addEventListener('submit', e => {
     e.preventDefault();
     const messageToSend = messageInput.value
-    if(messageToSend != "") // empty message will be ignored
-        socket.emit('send-message', messageToSend);
+    if(messageToSend != "")
+    {// empty message will be ignored
+        socket.emit('send-message', messageToSend)
+        appendMessage("You: "+messageToSend)
+    }
     // Resetting message input field
     messageInput.value = "";
 });
