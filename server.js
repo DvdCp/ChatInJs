@@ -1,5 +1,11 @@
 // -- IMPORTS --- //
-const i0 = require('socket.io')(3000);
+const io = require('socket.io')(5000, {
+    cors: {
+        methods: ["GET","POST"]
+    }
+});
 
-io.on('connection', socket)
+io.on('connection', socket => {
+    socket.emit('chat-message', 'Hello client !' );
+} ) 
 
