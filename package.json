@@ -1,0 +1,25 @@
+{
+  "name": "chatinjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DvdCp/ChatInJs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DvdCp/ChatInJs/issues"
+  },
+  "homepage": "https://github.com/DvdCp/ChatInJs#readme",
+  "dependencies": {
+    "socket.io": "^4.1.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
