@@ -22,8 +22,9 @@ io.on('connection', socket => {
     }),
     socket.on('disconnect', () =>{
         socket.broadcast.emit('user-disconnected', users[socket.id])
+        console.log(getTimeStamp()+": USER DISCONNECTED: "+users[socket.id]+"  Binded to: "+socket.id)
         delete users[socket.id]
-        console.log(getTimeStamp()+": USER DISCONNECTED: "+data+"  Binded to: "+socket.id)
+        
     })
 } ) 
 

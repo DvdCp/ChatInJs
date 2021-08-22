@@ -40,8 +40,6 @@ messageForm.addEventListener('submit', e => {
     messageInput.value = "";
 });
 
-
-
 // ---- DIV CREATION METHODS ---- \\
 
 // **** RECIVED MESSAGE ****
@@ -49,7 +47,8 @@ function appendMessage(message){
     const messageElement = document.createElement('div')
     messageElement.setAttribute('class','recivedMessage')
     messageElement.innerText = message
-    messageContainer.append(messageElement)    
+    messageContainer.append(messageElement)
+    refreshChatDiv()    
 }
 
 // **** NEW USER JOINED NOTIFICATION ****
@@ -58,6 +57,7 @@ function userNotification(newUser){
     newUserNotification.setAttribute('class','centeredNotification')
     newUserNotification.innerText = newUser
     messageContainer.append(newUserNotification) 
+    refreshChatDiv()
 }
 
 // **** SENT MESSAGE ****
@@ -66,4 +66,10 @@ function appendSentMessage(message){
     messageElement.setAttribute('class','sentMessage')
     messageElement.innerText = message
     messageContainer.append(messageElement)    
+    refreshChatDiv()
+}
+
+// ---- REFRESH DIV ---- \\
+function refreshChatDiv(){
+    messageContainer.scrollTop = messageContainer.scrollHeight;
 }
