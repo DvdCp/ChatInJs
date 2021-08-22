@@ -8,12 +8,12 @@ const io = require('socket.io')(5000, {
 // Very little db
 const users = {}
 
-// Creating connection
+// ---- CREATING CONNECTION ---- \\
 io.on('connection', socket => {
     socket.on('new-user', data => {
         socket.broadcast.emit('new-user-connected', data)
         users[socket.id] = data
-        console.log(getTimeStamp()+": New user logged: "+data+"  Binded to: "+socket.id)
+        console.log(getTimeStamp()+": USER LOGGED: "+data+"  Binded to: "+socket.id)
         
     }),
     socket.on('send-message', message => {
@@ -23,10 +23,11 @@ io.on('connection', socket => {
     socket.on('disconnect', () =>{
         socket.broadcast.emit('user-disconnected', users[socket.id])
         delete users[socket.id]
+        console.log(getTimeStamp()+": USER DISCONNECTED: "+data+"  Binded to: "+socket.id)
     })
 } ) 
 
-// Utility methods
+// ---- UTILITY METHODS ---- \\
 function getTimeStamp(){
     const DD_MM_YY = new Date().toLocaleDateString()
     const HH_MM_SS = new Date().toLocaleTimeString()

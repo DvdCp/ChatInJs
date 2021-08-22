@@ -6,22 +6,27 @@ const messageForm = document.getElementById('send-container');
 const messageInput = document.getElementById('message-input');
 const messageContainer = document.getElementById('message-container')
 
-// Asking for username
+// ---- USERNAME INPUT ---- \\
 const username = prompt("Hello ! Insert your username")
 socket.emit('new-user', username)
+userNotification("You joined")
 
+
+// ---- RECEIVING METHODS  ---- \\
 socket.on('chat-message', data => {
     appendMessage(data.name+": "+data.message)
 })
 
-socket.on('new-user-connected', data => {
-    userNotification(data)
+socket.on('new-user-connected', user => {
+    userNotification(user+' joined')
 })
 
-socket.on('user-disconnected', data => {
-    appendMessage(data+" disconnected") 
+socket.on('user-disconnected', user => {
+    userNotification(user+' disconnected')
 })
 
+
+// ---- SENDING MESSAGES ---- \\
 messageForm.addEventListener('submit', e => {
     e.preventDefault();
 
@@ -51,7 +56,7 @@ function appendMessage(message){
 function userNotification(newUser){
     const newUserNotification = document.createElement('div')
     newUserNotification.setAttribute('class','centeredNotification')
-    newUserNotification.innerText = newUser + " joined"
+    newUserNotification.innerText = newUser
     messageContainer.append(newUserNotification) 
 }
 
