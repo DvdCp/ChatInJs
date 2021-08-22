@@ -5,6 +5,18 @@ body {
   justify-content: center;
 }
 
+.centeredNotification{
+  text-align: center;
+}
+
+.sentMessage{
+  text-align: right;
+}
+
+.recivedMessage{
+  text-align: left;
+}
+
 #message-container {
   width: 80%;
   max-width: 1200px;

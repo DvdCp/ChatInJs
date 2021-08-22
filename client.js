@@ -15,7 +15,7 @@ socket.on('chat-message', data => {
 })
 
 socket.on('new-user-connected', data => {
-    appendMessage(data+" joined") 
+    userNotification(data)
 })
 
 socket.on('user-disconnected', data => {
@@ -24,18 +24,41 @@ socket.on('user-disconnected', data => {
 
 messageForm.addEventListener('submit', e => {
     e.preventDefault();
+
     const messageToSend = messageInput.value
-    if(messageToSend != "")
-    {// empty message will be ignored
+    if(messageToSend != "") // empty message will be ignored
+    {   
         socket.emit('send-message', messageToSend)
-        appendMessage("You: "+messageToSend)
+        appendSentMessage("You: "+messageToSend)
     }
-    // Resetting message input field
+    // Resetting input field
     messageInput.value = "";
 });
 
+
+
+// ---- DIV CREATION METHODS ---- \\
+
+// **** RECIVED MESSAGE ****
 function appendMessage(message){
     const messageElement = document.createElement('div')
+    messageElement.setAttribute('class','recivedMessage')
+    messageElement.innerText = message
+    messageContainer.append(messageElement)    
+}
+
+// **** NEW USER JOINED NOTIFICATION ****
+function userNotification(newUser){
+    const newUserNotification = document.createElement('div')
+    newUserNotification.setAttribute('class','centeredNotification')
+    newUserNotification.innerText = newUser + " joined"
+    messageContainer.append(newUserNotification) 
+}
+
+// **** SENT MESSAGE ****
+function appendSentMessage(message){
+    const messageElement = document.createElement('div')
+    messageElement.setAttribute('class','sentMessage')
     messageElement.innerText = message
     messageContainer.append(messageElement)    
 }
